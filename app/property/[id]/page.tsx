@@ -1,206 +1,196 @@
-import React from 'react';
-import { 
-  ChevronLeft, 
-  Share, 
-  Heart, 
-  Star, 
-  MapPin, 
-  BedDouble, 
-  Bath, 
-  Maximize, 
-  CheckCircle2, 
-  Calendar,
-  ShieldCheck,
-  User,
-  Coffee,
-  Wifi,
-  Wind
-} from 'lucide-react';
+"use client";
 
-const Amenity = ({ icon: Icon, text }: { icon: any, text: string }) => (
-  <div className="flex items-center gap-4 py-4 border-b border-slate-50 group hover:bg-slate-50/50 transition-colors px-2 rounded-xl">
-    <div className="text-emerald-500 bg-emerald-50 p-2 rounded-lg group-hover:bg-emerald-500 group-hover:text-white transition-all">
-      <Icon size={18} />
-    </div>
-    <span className="text-slate-600 font-semibold text-sm">{text}</span>
-  </div>
-);
+import React from "react";
+import Image from "next/image";
+import { Navbar } from "@/components/ui/Navbar";
+import { Bed, Bath, Move, MapPin, Heart, Share2, ShieldCheck, Mail, Phone, Calendar } from "lucide-react";
 
-export default function PropertyDetail() {
-  // Gallery Logic: Exterior followed by your new Interior links
-  const gallery = [
-    {
-      url: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768848799/pexels-andreea-ch-371539-1060950_j2txml.jpg",
-      label: "Exterior"
-    },
-    {
-      url: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768850391/pexels-curtis-adams-1694007-3555619_smaqzk.jpg",
-      label: "Living Space"
-    },
-    {
-      url: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768850019/pexels-athenea-codjambassis-rossitto-472760075-26571197_untw22.jpg",
-      label: "Master Suite"
-    },
-    {
-      url: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768850656/pexels-andrew-5860599_cmrcfe.jpg",
-      label: "Designer Kitchen"
-    },
-  ];
+const GALLERY = [
+  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?q=80&w=2070&auto=format&fit=crop",
+  "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop",
+];
 
+export default function PropertyDetailPage() {
   return (
-    <div className="min-h-screen bg-white pb-20">
-      {/* Premium Top Bar */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100 px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <button className="flex items-center gap-2 text-slate-900 font-black text-xs uppercase tracking-[0.2em] hover:text-emerald-600 transition-colors">
-            <ChevronLeft size={18} strokeWidth={3} /> Back to Gallery
-          </button>
-          <div className="flex gap-3">
-            <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all">
-              <Share size={16} /> Share
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold hover:bg-slate-50 transition-all">
-              <Heart size={16} /> Save
-            </button>
-          </div>
-        </div>
-      </nav>
+    <main className="min-h-screen bg-white pt-28 pb-24">
+      <Navbar variant="search" />
 
-      {/* Hero Gallery Section */}
-      <section className="px-6 max-w-7xl mx-auto mt-8 mb-16">
-        <div className="grid grid-cols-12 grid-rows-2 gap-4 h-[700px]">
-          {/* Main Large Exterior Image */}
-          <div className="col-span-12 lg:col-span-8 row-span-2 rounded-[40px] overflow-hidden shadow-2xl relative group">
-            <img src={gallery[0].url} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Main Exterior" />
-            <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-xl">
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-900">Main Entrance</span>
-            </div>
-          </div>
-
-          {/* Interior Vertical Stack */}
-          <div className="hidden lg:block lg:col-span-4 row-span-1 rounded-[40px] overflow-hidden shadow-lg relative group">
-            <img src={gallery[1].url} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Interior 1" />
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all" />
-          </div>
-
-          <div className="hidden lg:grid lg:col-span-4 row-span-1 grid-cols-2 gap-4">
-            <div className="rounded-[32px] overflow-hidden shadow-lg group">
-              <img src={gallery[2].url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Interior 2" />
-            </div>
-            <div className="rounded-[32px] overflow-hidden shadow-lg relative group cursor-pointer">
-              <img src={gallery[3].url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Interior 3" />
-              <div className="absolute inset-0 bg-slate-900/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-white font-black text-xs uppercase tracking-widest">+ 15 More</span>
+      {/* Header Section */}
+      <section className="px-6 md:px-12 lg:px-24 mb-12">
+        <div className="container mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-metadata bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full border border-emerald-100 font-bold">
+                  Exclusive Listing
+                </span>
+                <span className="text-metadata bg-slate-900 text-white px-3 py-1 rounded-full font-bold">
+                  For Sale
+                </span>
               </div>
+              <h1 className="text-4xl md:text-5xl font-sora font-extrabold text-slate-950 mb-3">Modern Glass Mansion</h1>
+              <div className="flex items-center gap-2 text-slate-500 font-medium">
+                <MapPin size={18} className="text-emerald-500" />
+                <span>742 Evergreen Terrace, Beverly Hills, CA 90210</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <button className="flex items-center gap-2 bg-slate-50 border border-slate-100 px-5 py-3 rounded-2xl font-bold text-slate-900 hover:bg-white transition-all">
+                <Share2 size={18} />
+                Share
+              </button>
+              <button className="flex items-center gap-2 bg-white border border-slate-100 px-5 py-3 rounded-2xl font-bold text-slate-900 hover:text-rose-500 transition-all shadow-sm">
+                <Heart size={18} />
+                Save Listing
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Information Layout */}
-      <main className="px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
-        
-        {/* Detail Body */}
-        <div className="lg:col-span-8">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-amber-50 rounded-full">
-              <Star size={14} className="text-amber-500 fill-amber-500" />
-              <span className="text-xs font-black text-amber-700 tracking-tighter">4.9 Rare Find</span>
+      {/* Gallery Section - Masonry Flow */}
+      <section className="px-6 md:px-12 lg:px-24 mb-16">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[400px] md:h-[600px]">
+            <div className="md:col-span-2 md:row-span-2 relative rounded-[32px] overflow-hidden group">
+              <Image src={GALLERY[0]} alt="Exterior" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
             </div>
-            <span className="text-slate-300">•</span>
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-widest underline underline-offset-4 cursor-pointer">Beverly Hills, CA</span>
-          </div>
-
-          <h1 className="text-6xl font-black tracking-tighter text-slate-900 mb-8 leading-[0.9]">White Sands <br /> Modern Manor</h1>
-          
-          <div className="flex flex-wrap gap-10 py-10 border-y border-slate-100 mb-12">
-            <div className="flex items-center gap-4">
-              <div className="bg-slate-50 p-4 rounded-2xl"><BedDouble className="text-slate-900" size={24} /></div>
-              <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Rooms</p>
-                <p className="text-lg font-bold">5 Bedrooms</p>
-              </div>
+            <div className="md:col-span-1 relative rounded-[32px] overflow-hidden group">
+              <Image src={GALLERY[1]} alt="Living Area" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
-            <div className="flex items-center gap-4">
-              <div className="bg-slate-50 p-4 rounded-2xl"><Bath className="text-slate-900" size={24} /></div>
-              <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Baths</p>
-                <p className="text-lg font-bold">4.5 Baths</p>
-              </div>
+            <div className="md:col-span-1 relative rounded-[32px] overflow-hidden group">
+              <Image src={GALLERY[2]} alt="Kitchen" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
             </div>
-            <div className="flex items-center gap-4">
-              <div className="bg-slate-50 p-4 rounded-2xl"><Maximize className="text-slate-900" size={24} /></div>
-              <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Area</p>
-                <p className="text-lg font-bold">4,200 sqft</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h3 className="text-2xl font-black text-slate-900 mb-6 tracking-tight">The Space</h3>
-            <p className="text-slate-500 leading-relaxed text-xl font-medium">
-              Experience unparalleled sophistication in this fully-automated smart home. 
-              The grand entrance leads to a double-height living room featuring 
-              the specific <span className="text-slate-900 font-bold italic underline decoration-emerald-400 underline-offset-4">curated interiors</span> shown in the gallery. 
-              From the Italian-marble kitchen to the private pool terrace, every inch 
-              of this residence screams luxury.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">World-Class Amenities</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12">
-              <Amenity icon={Wifi} text="Ultra-fast Fiber Internet" />
-              <Amenity icon={Coffee} text="Designer Espresso Bar" />
-              <Amenity icon={Wind} text="Central Climate Control" />
-              <Amenity icon={ShieldCheck} text="24/7 Concierge Service" />
+            <div className="md:col-span-2 relative rounded-[32px] overflow-hidden group">
+              <Image src={GALLERY[3]} alt="Master Bedroom" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+              <button className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl font-bold text-slate-950 shadow-lg">
+                View All 24 Photos
+              </button>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Sticky Booking Sidebar */}
-        <div className="lg:col-span-4">
-          <div className="sticky top-32 bg-slate-900 rounded-[48px] p-10 text-white shadow-2xl shadow-slate-300">
-            <div className="flex items-start justify-between mb-10">
-              <div className="flex flex-col">
-                <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Price per month</span>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-black tracking-tighter">$6,100</span>
+      {/* Details & Sidebar */}
+      <section className="px-6 md:px-12 lg:px-24">
+        <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Main Content */}
+          <div className="lg:col-span-2">
+            <div className="bg-slate-50 border border-slate-100 rounded-[32px] p-8 md:p-12 mb-12 grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="flex flex-col gap-2">
+                <p className="text-metadata">Price</p>
+                <h3 className="text-2xl font-sora font-extrabold text-slate-950">$4,250,000</h3>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-metadata">Bedrooms</p>
+                <div className="flex items-center gap-2">
+                  <Bed className="text-emerald-500" size={20} />
+                  <h3 className="text-2xl font-sora font-extrabold text-slate-950">5</h3>
                 </div>
               </div>
-              <div className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-lg">
-                <span className="text-[10px] font-bold">Tax Inc.</span>
+              <div className="flex flex-col gap-2">
+                <p className="text-metadata">Bathrooms</p>
+                <div className="flex items-center gap-2">
+                  <Bath className="text-emerald-500" size={20} />
+                  <h3 className="text-2xl font-sora font-extrabold text-slate-950">6</h3>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-metadata">Square Feet</p>
+                <div className="flex items-center gap-2">
+                  <Move className="text-emerald-500" size={20} />
+                  <h3 className="text-2xl font-sora font-extrabold text-slate-950">5,400</h3>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-4 mb-10">
-              <div className="bg-white/5 border border-white/10 p-5 rounded-3xl flex items-center justify-between hover:bg-white/10 transition-colors cursor-pointer">
-                <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Duration</p>
-                  <p className="font-bold text-sm">12 Months (Minimum)</p>
-                </div>
-                <Calendar size={18} className="text-emerald-400" />
-              </div>
-              <div className="bg-white/5 border border-white/10 p-5 rounded-3xl flex items-center justify-between hover:bg-white/10 transition-colors cursor-pointer">
-                <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Occupants</p>
-                  <p className="font-bold text-sm">Up to 6 Residents</p>
-                </div>
-                <User size={18} className="text-emerald-400" />
-              </div>
+            <div className="mb-12">
+              <h2 className="text-3xl font-sora font-extrabold text-slate-950 mb-6">About this Property</h2>
+              <p className="text-slate-600 leading-relaxed font-medium mb-6">
+                Redefine luxury living in this stunning architectural masterpiece located in the heart of Beverly Hills. 
+                Designed with a seamless flow between indoor and outdoor spaces, this residence features floor-to-ceiling 
+                glass walls that offer breathtaking views of the lush California landscape.
+              </p>
+              <p className="text-slate-600 leading-relaxed font-medium">
+                The master suite is a sanctuary of comfort, boasting a private balcony, a spa-like bathroom, and a custom 
+                walk-in closet. Outside, the zero-edge infinity pool and meticulously landscaped gardens create a private 
+                oasis perfect for both relaxation and grand entertaining.
+              </p>
             </div>
 
-            <button className="w-full bg-emerald-500 text-slate-900 py-6 rounded-3xl font-black text-sm hover:bg-white transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg shadow-emerald-500/20 uppercase tracking-[0.2em]">
-              Apply to Rent
-            </button>
+            <div>
+              <h2 className="text-3xl font-sora font-extrabold text-slate-950 mb-8">Premium Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  "Smart Home Automation",
+                  "Private Wine Cellar",
+                  "Chef's Kitchen with Wolf Appliances",
+                  "Infinity Pool & Spa",
+                  "Home Theater Room",
+                  "Three-Car Showroom Garage"
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-center gap-4 bg-white border border-slate-100 p-5 rounded-2xl">
+                    <div className="w-10 h-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600">
+                      <ShieldCheck size={20} />
+                    </div>
+                    <span className="font-bold text-slate-900">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
-            <p className="text-[10px] text-slate-500 text-center mt-8 font-bold uppercase tracking-widest leading-relaxed">
-              * Verification required by landlord <br /> before viewing schedule.
-            </p>
+          {/* Sidebar - Contact Agent */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-32 bg-white border border-slate-100 rounded-[32px] p-8 shadow-xl">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-emerald-500">
+                  <Image src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974&auto=format&fit=crop" alt="Agent" fill className="object-cover" />
+                </div>
+                <div>
+                  <h4 className="font-sora font-extrabold text-slate-950 text-xl">Alexander Knight</h4>
+                  <p className="text-metadata text-emerald-600 font-bold">Premier Agent</p>
+                  <div className="flex gap-0.5 mt-1 text-amber-400">
+                    <Calendar size={14} fill="currentColor" />
+                    <Calendar size={14} fill="currentColor" />
+                    <Calendar size={14} fill="currentColor" />
+                    <Calendar size={14} fill="currentColor" />
+                    <Calendar size={14} fill="currentColor" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4">
+                <button className="w-full bg-slate-950 text-white py-5 rounded-2xl font-bold flex items-center justify-center gap-3 hover:bg-slate-800 transition-all shadow-lg">
+                  <Calendar size={20} />
+                  Book a Viewing
+                </button>
+                <div className="grid grid-cols-2 gap-4">
+                  <button className="bg-slate-50 border border-slate-100 py-4 rounded-2xl font-bold text-slate-900 flex items-center justify-center gap-2 hover:bg-white transition-all">
+                    <Mail size={18} className="text-emerald-500" />
+                    Email
+                  </button>
+                  <button className="bg-slate-50 border border-slate-100 py-4 rounded-2xl font-bold text-slate-900 flex items-center justify-center gap-2 hover:bg-white transition-all">
+                    <Phone size={18} className="text-emerald-500" />
+                    Call
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-8 border-t border-slate-100 text-center">
+                <p className="text-xs text-slate-400 font-medium italic">
+                  Average response time: <span className="text-slate-900 font-bold">15 minutes</span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }

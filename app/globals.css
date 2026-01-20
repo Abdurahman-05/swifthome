@@ -25,10 +25,20 @@ html {
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #0f172a; /* slate-900 */
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+}
+
+.text-metadata {
+  color: #64748b; /* slate-500 */
+  text-transform: uppercase;
+  letter-spacing: 0.1em; /* tracking-widest */
+  font-size: 0.75rem; /* text-xs */
 }

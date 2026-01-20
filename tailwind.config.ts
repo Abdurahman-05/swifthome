@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: colors.emerald[600],
+          DEFAULT: colors.emerald[500],
           ...colors.emerald,
         },
         neutral: colors.slate,
@@ -18,6 +18,10 @@ const config: Config = {
       fontFamily: {
         sora: ["var(--font-sora)", "sans-serif"],
         inter: ["var(--font-inter)", "sans-serif"],
+      },
+      borderRadius: {
+        "32": "32px",
+        "48": "48px",
       },
     },
   },

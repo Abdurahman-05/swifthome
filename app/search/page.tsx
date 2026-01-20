@@ -1,100 +1,140 @@
-import React from 'react';
-import { 
-  Search, Home, MapPin, LayoutGrid, Map as MapIcon, 
-  ChevronDown, BedDouble, Bath, Maximize, Heart, Filter 
-} from 'lucide-react';
+"use client";
 
-// Using your exact PropertyCard formula
-const PropertyCard = ({ image, price, title, location, beds, baths, sqft }: any) => (
-  <div className="group cursor-pointer">
-    <div className="relative aspect-[4/5] overflow-hidden rounded-[32px] mb-4 shadow-sm group-hover:shadow-xl transition-all duration-500">
-      <img src={image} alt={title} className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <button className="absolute top-4 right-4 p-2.5 bg-white/90 backdrop-blur-md rounded-full text-slate-900 hover:bg-emerald-500 hover:text-white transition-all">
-        <Heart size={18} />
-      </button>
-      <div className="absolute bottom-4 left-4">
-        <div className="bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg">
-          <span className="text-xl font-black text-slate-900">{price}</span>
-          <span className="text-[10px] uppercase tracking-wider text-slate-500 font-bold ml-1">/ mo</span>
-        </div>
-      </div>
-    </div>
-    <div className="px-1">
-      <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-emerald-600 transition-colors">{title}</h3>
-      <div className="flex items-center gap-1 text-slate-400 text-xs font-medium mb-4">
-        <MapPin size={12} className="text-emerald-500" />
-        <span>{location}</span>
-      </div>
-      <div className="flex items-center justify-between p-3.5 bg-slate-50 rounded-2xl border border-slate-100 text-slate-700">
-        <div className="flex items-center gap-1.5"><BedDouble size={16} className="text-slate-400" /><span className="text-xs font-bold">{beds} bds</span></div>
-        <div className="h-4 w-[1px] bg-slate-200" />
-        <div className="flex items-center gap-1.5"><Bath size={16} className="text-slate-400" /><span className="text-xs font-bold">{baths} ba</span></div>
-        <div className="h-4 w-[1px] bg-slate-200" />
-        <div className="flex items-center gap-1.5"><Maximize size={16} className="text-slate-400" /><span className="text-xs font-bold">{sqft} sqft</span></div>
-      </div>
-    </div>
-  </div>
-);
+import React from "react";
+import { Navbar } from "@/components/ui/Navbar";
+import { PropertyCard } from "@/components/ui/PropertyCard";
+import { Filter, SlidersHorizontal, Map as MapIcon, ChevronDown } from "lucide-react";
+
+const PROPERTIES = [
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop",
+    price: "$4,250,000",
+    address: "742 Evergreen Terrace, Beverly Hills, CA",
+    beds: 5,
+    baths: 6,
+    sqft: 5400,
+    category: "Luxe Mansions"
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+    price: "$2,890,000",
+    address: "120 Ocean View Dr, Malibu, CA",
+    beds: 4,
+    baths: 3,
+    sqft: 3200,
+    category: "Coastal Retreats"
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
+    price: "$3,150,000",
+    address: "888 Skyline Way, Aspen, CO",
+    beds: 6,
+    baths: 5,
+    sqft: 4800,
+    category: "Mountain Escapes"
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format&fit=crop",
+    price: "$1,850,000",
+    address: "45 Villa Ave, Scottsdale, AZ",
+    beds: 3,
+    baths: 3,
+    sqft: 2800,
+    category: "Modern Villas"
+  },
+  {
+    id: 5,
+    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop",
+    price: "$5,500,000",
+    address: "10 Bel Air Rd, Los Angeles, CA",
+    beds: 7,
+    baths: 8,
+    sqft: 8200,
+    category: "Luxe Mansions"
+  },
+  {
+    id: 6,
+    image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=1965&auto=format&fit=crop",
+    price: "$980,000",
+    address: "22 Forest Ln, Portland, OR",
+    beds: 2,
+    baths: 2,
+    sqft: 1500,
+    category: "Forest Retreats"
+  }
+];
 
 export default function SearchPage() {
-  const propertyData = [
-    { image: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768848799/pexels-andreea-ch-371539-1060950_j2txml.jpg", price: "$6,100", title: "White Sands Manor", location: "Beverly Hills, CA", beds: 5, baths: 4, sqft: "4,200" },
-    { image: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768848798/pexels-viktoriia-kondratiuk-458099300-17174766_d54nd0.jpg", price: "$4,250", title: "The Glass Pavilion", location: "Malibu, CA", beds: 4, baths: 3, sqft: "2,850" },
-    { image: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768848815/pexels-ali-ramazan-ciftci-82252581-14246458_qaa4yk.jpg", price: "$5,200", title: "Obsidian Modern", location: "Seattle, WA", beds: 4, baths: 4, sqft: "3,100" },
-    { image: "https://res.cloudinary.com/djjasfjpr/image/upload/v1768848805/pexels-curtis-adams-1694007-10628388_td3fto.jpg", price: "$2,950", title: "The Azure Residence", location: "Scottsdale, AZ", beds: 3, baths: 3, sqft: "1,950" },
-  ];
-
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      
-      {/* FIXED NAVBAR: Compact Centered Search Pill */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-7xl bg-white/70 backdrop-blur-2xl border border-white/40 shadow-xl rounded-[32px] px-6 py-3 flex items-center justify-between">
-        
-        {/* Left: Brand */}
-        <div className="flex items-center gap-2">
-          <div className="bg-slate-900 p-1.5 rounded-lg shadow-lg shadow-slate-200">
-            <Home className="text-white w-4 h-4" />
+    <main className="min-h-screen bg-slate-50 pt-28 pb-12">
+      <Navbar variant="search" />
+
+      {/* Filter Bar */}
+      <section className="px-6 md:px-12 lg:px-24 mb-8">
+        <div className="container mx-auto">
+          <div className="bg-white rounded-[24px] border border-slate-100 p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 px-4 py-2 rounded-xl text-slate-900 font-bold text-sm cursor-pointer hover:bg-white transition-all">
+                Price Range <ChevronDown size={16} className="text-slate-400" />
+              </div>
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 px-4 py-2 rounded-xl text-slate-900 font-bold text-sm cursor-pointer hover:bg-white transition-all">
+                Property Type <ChevronDown size={16} className="text-slate-400" />
+              </div>
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 px-4 py-2 rounded-xl text-slate-900 font-bold text-sm cursor-pointer hover:bg-white transition-all">
+                Bedrooms <ChevronDown size={16} className="text-slate-400" />
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <button className="flex items-center gap-2 bg-emerald-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20">
+                <MapIcon size={18} />
+                Show Map
+              </button>
+              <button className="flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-slate-100 text-slate-900 hover:bg-slate-50 transition-all">
+                <SlidersHorizontal size={18} />
+              </button>
+            </div>
           </div>
-          <span className="text-sm font-black tracking-tighter uppercase hidden lg:block">SwiftHome</span>
         </div>
+      </section>
 
-        {/* Center: COMPACT SEARCH PILL (Fixed width to avoid stretching) */}
-        <div className="flex items-center bg-slate-50 border border-slate-100 rounded-full px-2 py-1 shadow-inner max-w-md w-full mx-4">
-          <div className="flex items-center gap-2 px-4 py-2 border-r border-slate-200 flex-1 min-w-0">
-            <MapPin size={14} className="text-emerald-500 shrink-0" />
-            <input type="text" placeholder="Beverly Hills" className="bg-transparent text-xs font-bold outline-none w-full truncate" />
+      {/* Results Section */}
+      <section className="px-6 md:px-12 lg:px-24">
+        <div className="container mx-auto">
+          <div className="flex items-center justify-between mb-8 px-2">
+            <div>
+              <h2 className="text-2xl font-sora font-extrabold text-slate-950">Available Properties</h2>
+              <p className="text-metadata text-slate-500">Showing 24 results in Los Angeles</p>
+            </div>
+            <div className="flex items-center gap-2 text-sm font-bold text-slate-900 bg-white px-4 py-2 rounded-xl border border-slate-100">
+              Sort by: <span className="text-emerald-500">Recommended</span>
+              <ChevronDown size={14} className="text-slate-400" />
+            </div>
           </div>
-          <button className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-slate-900 whitespace-nowrap hidden sm:block">
-            Any Price
-          </button>
-          <button className="bg-emerald-500 text-white p-2.5 rounded-full hover:bg-slate-900 transition-all shrink-0 ml-1">
-            <Search size={14} strokeWidth={3} />
-          </button>
-        </div>
 
-        {/* Right: Actions */}
-        <div className="flex items-center gap-4">
-          <button className="text-[11px] font-bold text-slate-500 hover:text-slate-900 uppercase tracking-widest hidden md:block">Login</button>
-          <button className="bg-slate-900 text-white px-5 py-2.5 rounded-2xl text-[11px] font-bold shadow-lg shadow-slate-200">
-            List House
-          </button>
-        </div>
-      </nav>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            {PROPERTIES.map((prop) => (
+              <PropertyCard key={prop.id} {...prop} />
+            ))}
+            {PROPERTIES.map((prop) => (
+              <PropertyCard key={`second-${prop.id}`} {...prop} />
+            ))}
+          </div>
 
-      <main className="pt-32 px-6 max-w-7xl mx-auto pb-20">
-        <div className="flex items-end justify-between mb-12">
-          <h1 className="text-3xl font-bold tracking-tighter">Results in Beverly Hills <span className="text-slate-400 ml-2">(24)</span></h1>
-          <button className="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-100 rounded-xl text-[11px] font-bold text-slate-500 hover:text-slate-900">
-            <Filter size={14} /> Filter
-          </button>
+          {/* Pagination */}
+          <div className="mt-16 flex items-center justify-center gap-2">
+            <button className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-950 font-bold hover:bg-slate-100 transition-all">1</button>
+            <button className="w-10 h-10 rounded-full bg-slate-950 flex items-center justify-center text-white font-bold">2</button>
+            <button className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-950 font-bold hover:bg-slate-100 transition-all">3</button>
+            <span className="px-2 text-slate-400">...</span>
+            <button className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-950 font-bold hover:bg-slate-100 transition-all">8</button>
+          </div>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
-          {propertyData.map((prop, index) => <PropertyCard key={index} {...prop} />)}
-          {propertyData.map((prop, index) => <PropertyCard key={`rep-${index}`} {...prop} />)}
-        </div>
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
